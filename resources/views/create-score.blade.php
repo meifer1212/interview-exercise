@@ -434,21 +434,30 @@
                 <form action="{{ route('score.store') }}" method="post" style="width: 200px;">
                     @csrf
                     <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" value="{{ old('nombre') }}"class="form-control"
+                            name="nombre" id="nombre" placeholder="Introduce el nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" value="{{ old('apellido') }}"class="form-control"
+                            name="apellido" id="apellido" placeholder="Introduce el apellido">
+                    </div>
+                    <div class="form-group">
                         <label for="nota_1">Nota 1</label>
-                        <input type="number" value="{{ old('nota_1') }}" min="0" max="5" class="form-control"
-                            name="nota_1" id="nota_1" placeholder="Introduce la nota 1">
-
+                        <input type="number" value="{{ old('nota_1') }}" min="1" max="5" class="form-control"
+                            name="nota_1" id="nota_1" placeholder="Introduce la nota 1" required>
                     </div>
                     <div class="form-group">
                         <label for="nota_2">Nota 2</label>
-                        <input type="number" value="{{ old('nota_2') }}" min="0" max="5" class="form-control"
-                            name="nota_2" id="nota_2" placeholder="Introduce la nota 2">
+                        <input type="number" value="{{ old('nota_2') }}" min="1" max="5" class="form-control"
+                            name="nota_2" id="nota_2" placeholder="Introduce la nota 2" required>
 
                     </div>
                     <div class="form-group">
                         <label for="nota_3">Nota 3</label>
-                        <input type="number" value="{{ old('nota_3') }}" min="0" max="5" class="form-control"
-                            name="nota_3" id="nota_3" placeholder="Introduce la nota 3">
+                        <input type="number" value="{{ old('nota_3') }}" min="1" max="5" class="form-control"
+                            name="nota_3" id="nota_3" placeholder="Introduce la nota 3" required>
 
                     </div>
                     <div class="form-group" style="text-align: center">

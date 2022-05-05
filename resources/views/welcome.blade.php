@@ -425,6 +425,7 @@
             </div>
             <table class="table table-striped text-center">
                 <thead>
+                    <th>Nombre</th>
                     <th>Nota 1</th>
                     <th>Nota 2</th>
                     <th>Nota 3</th>
@@ -434,6 +435,7 @@
                 <tbody>
                     @forelse ($scores as $score)
                         <tr>
+                            <td>{{ $score->name }}</td>
                             <td>{{ $score->score_1 }}</td>
                             <td>{{ $score->score_2 }}</td>
                             <td>{{ $score->score_3 }}</td>
@@ -458,7 +460,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">No hay datos para mostrar.</td>
+                            <td colspan="52">No hay datos para mostrar.</td>
                         </tr>
                     @endforelse
                 </tbody>
