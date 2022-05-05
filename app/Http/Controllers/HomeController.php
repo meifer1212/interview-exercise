@@ -31,6 +31,12 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function edit($id)
+    {
+        $score = Score::find($id);
+        return view('edit-score',compact('score'));
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -46,7 +52,8 @@ class HomeController extends Controller
         }
         $prom = ($request->nota_1 + $request->nota_2 + $request->nota_3) / 3;
         $score = new Score();
-        $score->name = $request->nombre . ' ' . $request->apellido ?? '';
+        $score->name = $request->nombre;
+        $score->last_name = $request->apellido;
         $score->score_1 = $request->nota_1;
         $score->score_2 = $request->nota_2;
         $score->score_3 = $request->nota_3;

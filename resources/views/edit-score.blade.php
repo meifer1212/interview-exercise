@@ -419,66 +419,53 @@
         @endif
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-2">
-                <a class="text-primary button" href="{{ route('score.create') }}">
-                    Agregar Notas
-                </a>
+                <a class="text-primary" href="{{ route('home') }}">Atrás</a>
             </div>
-            <table class="table table-striped text-center">
-                <thead>
-                    <th>Nombre</th>
-                    <th>Nota 1</th>
-                    <th>Nota 2</th>
-                    <th>Nota 3</th>
-                    <th>Definitiva</th>
-                    <th>Opciones</th>
-                </thead>
-                <tbody>
-                    @forelse ($scores as $score)
-                        <tr>
-                            <td>{{ $score->name . ' ' . $score->last_name }}</td>
-                            <td>{{ $score->score_1 }}</td>
-                            <td>{{ $score->score_2 }}</td>
-                            <td>{{ $score->score_3 }}</td>
-                            <td>
-                                <strong>{{ round($score->final_score, 2) }}</strong>
-                            </td>
-                            <td>
-                                <div style="display: flex">
-                                    <form action="{{ route('score.edit', $score->id) }}">
-                                        <button type="submit" style="cursor: pointer">
-                                            <svg width="25px" height="25px" xmlns="http://www.w3.org/2000/svg"
-                                                class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-                                        </button>
-                                    </form>
-                                    <form action="{{ route('score.destroy', $score->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" style="cursor: pointer">
-                                            <svg width="25px" height="25px" xmlns="http://www.w3.org/2000/svg"
-                                                class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="52">No hay datos para mostrar.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <div class="mb-2">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route('score.store') }}" method="post" style="width: 200px;">
+                    @csrf
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" value="{{  $score->name }}" class="form-control" name="nombre"
+                            id="nombre" placeholder="Introduce el nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" value="{{$score->last_name }}" class="form-control"
+                            name="apellido" id="apellido" placeholder="Introduce el apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="nota_1">Nota 1</label>
+                        <input type="number" value="{{$score->score_1 }}" min="1" max="5"
+                            class="form-control" name="nota_1" id="nota_1" placeholder="Introduce la nota 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nota_2">Nota 2</label>
+                        <input type="number" value="{{ $score->score_2 }}" min="1" max="5"
+                            class="form-control" name="nota_2" id="nota_2" placeholder="Introduce la nota 2" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="nota_3">Nota 3</label>
+                        <input type="number" value="{{ old('nota_3') || $score->score_3 }}" min="1" max="5"
+                            class="form-control" name="nota_3" id="nota_3" placeholder="Introduce la nota 3" required>
+
+                    </div>
+                    <div class="form-group" style="text-align: center">
+                        <button type="submit" class="btn btn-primary">Subir notas</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-
 
         {{-- scripts --}}
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -16,6 +16,7 @@ class CreateScoresTable extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('last_name')->nullable();
             $table->double('score_1')->nullable();
             $table->double('score_2')->nullable();
             $table->double('score_3')->nullable();
