@@ -82,7 +82,27 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|alpha_dash|min:1|max:255',
+            'apellido' => 'nullable|alpha_dash|min:1|max:255',
+            'nota_1' => 'required|numeric|min:1|max:5',
+            'nota_2' => 'required|numeric|min:1|max:5',
+            'nota_3' => 'required|numeric|min:1|max:5',
+        ]);
+        if ($validator->fails()) {
+            return redirect(route('score.update'))->withErrors($validator)
+                ->withInput();
+        }
+        $prom = ($request->nota_1 + $request->nota_2 + $request->nota_3) / 3;
+        $score = Score::find($id);
+        $score->name = $request->nombre;
+        $score->last_name = $request->apellido;
+        $score->score_1 = $request->nota_1;
+        $score->score_2 = $request->nota_2;
+        $score->score_3 = $request->nota_3;
+        $score->final_score = $prom;
+        $score->save();
+        return redirect(route('home'));
     }
 
     /**

@@ -431,8 +431,9 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('score.store') }}" method="post" style="width: 200px;">
+                <form action="{{ route('score.update',$score->id) }}" method="post" style="width: 200px;">
                     @csrf
+                    @method('put')
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" value="{{  $score->name }}" class="form-control" name="nombre"
@@ -461,7 +462,7 @@
 
                     </div>
                     <div class="form-group" style="text-align: center">
-                        <button type="submit" class="btn btn-primary">Subir notas</button>
+                        <button type="submit" class="btn btn-primary">Actualizar notas</button>
                     </div>
                 </form>
             </div>

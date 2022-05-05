@@ -21,5 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/create',[HomeController::class,'create'])->name('score.create');
 Route::get('/edit/{id}',[HomeController::class,'edit'])->name('score.edit');
+Route::put('/update/{id}',[HomeController::class,'update'])->name('score.update');
 Route::post('/store',[HomeController::class,'store'])->name('score.store');
 Route::delete('/destroy/{id}',[HomeController::class,'destroy'])->name('score.destroy');
